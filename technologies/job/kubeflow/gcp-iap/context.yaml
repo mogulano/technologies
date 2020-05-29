@@ -5,17 +5,16 @@ recommended: true
 trustLevel: experimental
 endpoint:
   features:
-    - type: URL
-      name: url
-      label: Endpoint URL
-      required: true
-      helper: e.g. use http://localhost:4000 (may be another port if run with --port)
     - type: TEXT
-      name: username
-      label: Username
-    - type: PASSWORD
-      name: password
-      label: Password
+      name: serviceAccountKey
+      label: Service Account Key
+      required: true
+      helper: JSON file from google IAM & Admin / Service Accounts / kubeflow service acccount / Key ID
+    - type: TEXT
+      name: url
+      label: Kubeflow Instance Base API URL
+      required: true
+      helper: Should have the following form eg. https://3a5ec533b1675499-dot-europe-west1.pipelines.googleusercontent.com
 job:
   features:
     - type: ENDPOINT
@@ -23,14 +22,29 @@ job:
       label: Endpoint
       required: true
     - type: SELECT
-      name: dataset
-      label: Dataset
+      name: category
+      label: Category
+      required: true
+      options:
+        - id: pipelines
+          label: Pipelines
+        - id: experiments
+          label: Experiments
+        - id: jobs
+          label: Jobs
+        - id: runs
+          label: Runs
+      dependsOn:
+        - endpoint
+    - type: SELECT
+      name: items
+      label: Items
       required: true
       options:
         script: ./jobForm.js
-        function: getDatasets
+        function: getItems
       dependsOn:
-        - endpoint
+        - category
 instance:
   actions:
     onStart:
