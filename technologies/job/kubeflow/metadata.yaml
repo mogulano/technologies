@@ -1,0 +1,70 @@
+version: v1
+id: kubeflow
+label: Kubeflow
+description: "Kubeflow technology for Saagie Platform"
+available: true
+type: EXTERNAL_JOB
+icon: job
+
+contexts:
+  - id: gcp-iap
+    label: gcp-iap
+    description: "For Kubeflow on Google Cloud Platform (GCP) with Cloud Identity-Aware Proxy (Cloud IAP)"
+    recommended: true
+    trustLevel: experimental
+    endpoint:
+      features:
+        - type: TEXT
+          name: serviceAccountKey
+          label: Service Account Key
+          required: true
+          helper: JSON file from google IAM & Admin / Service Accounts / kubeflow service acccount / Key ID
+        - type: TEXT
+          name: url
+          label: Kubeflow Instance Base API URL
+          required: true
+          helper: Should have the following form eg. https://3a5ec533b1675499-dot-europe-west1.pipelines.googleusercontent.com
+    job:
+      features:
+        - type: ENDPOINT
+          name: endpoint
+          label: Endpoint
+          required: true
+        - type: SELECT
+          name: category
+          label: Category
+          required: true
+          options:
+            - id: pipelines
+              label: Pipelines
+            - id: experiments
+              label: Experiments
+            - id: jobs
+              label: Jobs
+            - id: runs
+              label: Runs
+          dependsOn:
+            - endpoint
+        - type: SELECT
+          name: items
+          label: Items
+          required: true
+          options:
+            script: ./jobForm.js
+            function: getItems
+          dependsOn:
+            - category
+    instance:
+      actions:
+        onStart:
+          script: ./instanceActions.js
+          function: start
+        onStop:
+          script: ./instanceActions.js
+          function: stop
+        getStatus:
+          script: ./instanceActions.js
+          function: getStatus
+        getLogs:
+          script: ./instanceActions.js
+          function: getLogs
