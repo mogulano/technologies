@@ -1,0 +1,7 @@
+version: v1
+id: kubeflow
+label: Kubeflow
+description: "Kubeflow technology for Saagie Platform"
+available: true
+type: EXTERNAL_JOB
+icon: job
