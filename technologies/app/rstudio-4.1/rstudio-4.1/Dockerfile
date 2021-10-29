@@ -63,7 +63,7 @@ ENV PATH=$JAVA_HOME/bin:$PATH
 RUN cd / \
     && mkdir hadoop \ 
     && cd hadoop \ 
-    && wget https://archive.apache.org/dist/hadoop/core/hadoop-${HADOOP_VERSION}/hadoop-${HADOOP_VERSION}.tar.gz \ 
+    && wget --no-verbose https://archive.apache.org/dist/hadoop/core/hadoop-${HADOOP_VERSION}/hadoop-${HADOOP_VERSION}.tar.gz \ 
     && tar xf hadoop-${HADOOP_VERSION}.tar.gz \ 
     && rm hadoop-${HADOOP_VERSION}.tar.gz \ 
     && rm -rf hadoop-${HADOOP_VERSION}/etc/hadoop/ \ 

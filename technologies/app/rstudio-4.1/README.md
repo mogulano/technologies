@@ -18,7 +18,7 @@ If you want to allow this new user to install libraries, you need to add him to 
 # How to install on Saagie
 
 Create a custom app with the following options: 
-- Image: tonysaagie/docker-rstudio-lite
+- Image: saagie/rstudio
 - Port: 80
 - Basepath: SAAGIE_BASE_PATH
 - Rewrite: No
