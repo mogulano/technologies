@@ -88,7 +88,7 @@ R_HOME=$(Rscript -e 'Sys.getenv("R_HOME")' | sed -rn 's/^\[[[:digit:]]+\] "(.*)"
 
 env | while read VAR
 do
-  if ! grep -q "$VAR" /ROOT_ENV_VAR && ! echo "$VAR" | grep -q "PASSWORD"
+  if ! grep -q "$VAR" /ROOT_ENV_VAR && ! echo "$VAR" | grep -q "RSTUDIO_ADMIN_PASSWORD"
   then
     echo $VAR >> $R_HOME/etc/Renviron.site
   fi
